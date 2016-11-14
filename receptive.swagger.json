@@ -1,0 +1,172 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Receptive API",
+        "contact": {
+            "name": "Receptive Support",
+            "url": "https://help.receptive.io/hc",
+            "email": "support@receptive.io"
+        }
+    },
+    "host": "api.eu-west-1.receptive.io",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "userApiKey": {
+            "description": "Generate an API Key at http://receptive.io/app/integrate. This key should then be added to every request URL as a query parameter.",
+            "type": "apiKey",
+            "name": "auth-token",
+            "in": "query"
+        }
+    },
+    "security": [
+        {
+            "userApiKey": []
+        }
+    ],
+    "paths": {
+        "/health-check/ping": {
+            "get": {
+                "security": [],
+                "tags": [
+                    "system"
+                ],
+                "summary": "Health check for API",
+                "description": "Provides a response for automatic checks that the API and load balancers are healthy",
+                "responses": {
+                    "200": {
+                        "description": "API is healthy"
+                    },
+                    "503": {
+                        "description": "Load balancers cannot route a request to a healthy API server"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get a User record",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the User record",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "410": {
+                        "description": "User has been deleted"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Create or update an EndUser",
+                "description": "Replicates much of the functionality of the widget ping, allowing callers to create or update User records for End Users. This endpoint is used by our Zapier integration.",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "description": "the account and user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EndUserPing"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the new or updated user"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Account": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "is_paying": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "dateTime"
+                },
+                "monthly_value": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "roles": {
+                    "type": "string",
+                    "enum": [
+                        "endUser"
+                    ]
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string",
+                    "format": "dateTime"
+                },
+                "full_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "EndUserPing": {
+            "type": "object",
+            "properties": {
+                "return_url": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/User"
+                },
+                "account": {
+                    "$ref": "#/definitions/Account"
+                }
+            }
+        }
+    }
+}
