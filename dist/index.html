@@ -37,7 +37,7 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = "http://receptive-api-docs.s3-website-eu-west-1.amazonaws.com/receptive.swagger.json";
+        url = "http://apidoc.receptive.io/receptive.swagger.json";
       }
 
       hljs.configure({
@@ -71,8 +71,8 @@
         onFailure: function(data) {
           log("Unable to Load SwaggerUI");
         },
-        docExpansion: "none",
-        jsonEditor: false,
+        docExpansion: "list",
+        jsonEditor: true,
         defaultModelRendering: 'schema',
         showRequestHeaders: false
       });
