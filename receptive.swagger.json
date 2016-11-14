@@ -3,6 +3,7 @@
     "info": {
         "version": "1.0.0",
         "title": "Receptive API",
+        "description": "API calls generally need to be authenticated. Generate an API Key at https://receptive.io/app/#/integrate. This key should then be added to every request URL as a query parameter named 'auth-token'\nAPI endpoint is https://api.eu-west-1.receptive.io.\nThe 'try it out' feature on this documentation page will probably be blocked by your browser because the Access-Control-Allow-Origin header has its value set by the Receptive server depending on your hostname.",
         "contact": {
             "name": "Receptive Support",
             "url": "https://help.receptive.io/hc",
@@ -18,7 +19,7 @@
     ],
     "securityDefinitions": {
         "userApiKey": {
-            "description": "Generate an API Key at http://receptive.io/app/integrate. This key should then be added to every request URL as a query parameter.",
+            "description": "Generate an API Key at https://receptive.io/app/#/integrate. This key should then be added to every request URL as a query parameter.",
             "type": "apiKey",
             "name": "auth-token",
             "in": "query"
