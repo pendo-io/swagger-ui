@@ -73,6 +73,29 @@
                         "description": "User has been deleted"
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Delete a User record",
+								"description": "This removes most traces of a User's existence from the system. For an EndUser you might want to consider just letting them churn after a period of inactivity.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the deleted User",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
             }
         },
         "/users": {
