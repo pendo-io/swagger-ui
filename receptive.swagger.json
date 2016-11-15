@@ -74,12 +74,54 @@
                     }
                 }
             },
+            "put": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Update a User",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number",
+                        "description": "Receptive's User ID"
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "permission_group_id": {
+                                    "type": "number",
+                                    "format": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "updated User",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            },
             "delete": {
                 "tags": [
                     "user"
                 ],
-                "summary": "Delete a User record",
-								"description": "This removes most traces of a User's existence from the system. For an EndUser you might want to consider just letting them churn after a period of inactivity.",
+                "summary": "Delete a User",
+                "description": "This removes most traces of a User's existence from the system. For an EndUser you might want to consider just letting them churn after a period of inactivity.",
                 "parameters": [
                     {
                         "name": "id",
@@ -106,8 +148,8 @@
                 "tags": [
                     "user"
                 ],
-                "summary": "Create or update an EndUser",
-                "description": "Replicates much of the functionality of the widget ping, allowing callers to create or update User records for End Users. This endpoint is used by our Zapier integration. The only value allowed in user.roles is 'endUser'",
+                "summary": "Ping to create or update an EndUser and Account in one call",
+                "description": "Replicates much of the functionality of the widget ping, allowing callers to create or update User records for End Users. If you call this with a new User and/or Account, the record will be created. If you call for an existing User/Account, the record will be updated. You can also call this at EndUser login time, or more frequently, to notify Receptive that the EndUser has been seen. This keeps Receptive's 'last seen' data fresh and updates your reporting. This endpoint is used by our Zapier integration. The only value allowed in user.roles is 'endUser'. The id you supply here for the User and Account should be your own unique id, which Receptive calls external_id. This probably isn't the same as Receptive's id seen elsewhere in the API.",
                 "parameters": [
                     {
                         "name": "data",
