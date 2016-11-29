@@ -30,6 +30,176 @@
         }
     ],
     "paths": {
+        "/accounts/{id}/tags": {
+            "get": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Get custom Account tags",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number",
+                        "description": "Receptive's Account ID"
+
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the custom Account tags",
+                        "schema": {
+                            "$ref": "#/definitions/CustomTags"
+                        }
+                    },
+                    "404": {
+                        "description": "Account not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Overwrite current custom Account tags with the given tags",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number",
+                        "description": "Receptive's Account ID"
+                    },
+                    {
+                        "name": "tags",
+                        "required": true,
+                        "in": "body",
+                        "description": "An array of maps specifying tags under each tag group, for example:\n\n{'impacts' => ['sales']},\n{'resources' => ['dev', 'test', 'support']\n}",
+                        "schema": {
+                            "$ref": "#/definitions/CustomTags"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated Account tags",
+                        "schema": {
+                            "$ref": "#/definitions/CustomTags"
+                        }
+                    },
+                    "404": {
+                        "description": "Account not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Delete custom Account tags",
+                "description": "Removes all custom tags associated with the Account",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number",
+                        "description": "Receptive's Account ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/features/{id}/tags": {
+            "get": {
+                "tags": [
+                    "feature"
+                ],
+                "summary": "Get custom Feature tags",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number",
+                        "description": "Receptive's Feature ID"
+
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the custom Feature tags",
+                        "schema": {
+                            "$ref": "#/definitions/CustomTags"
+                        }
+                    },
+                    "404": {
+                        "description": "Feature not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "feature"
+                ],
+                "summary": "Overwrite current custom Feature tags with the given tags",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number",
+                        "description": "Receptive's Feature ID"
+                    },
+                    {
+                        "name": "tags",
+                        "required": true,
+                        "in": "body",
+                        "description": "An array of maps specifying tags under each tag group, for example:\n\n{'impacts' => ['sales']},\n{'resources' => ['dev', 'test', 'support']\n}",
+                        "schema": {
+                            "$ref": "#/definitions/CustomTags"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated Feature tags",
+                        "schema": {
+                            "$ref": "#/definitions/CustomTags"
+                        }
+                    },
+                    "404": {
+                        "description": "Feature not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "feature"
+                ],
+                "summary": "Delete custom Feature tags",
+                "description": "Removes all custom tags associated with the Feature",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number",
+                        "description": "Receptive's Feature ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
         "/health-check/ping": {
             "get": {
                 "security": [],
@@ -136,6 +306,91 @@
                         "schema": {
                             "$ref": "#/definitions/User"
                         }
+                    }
+                }
+            }
+        },
+        "/users/{id}/tags": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get custom User tags",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number",
+                        "description": "Receptive's User ID"
+
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the custom User tags",
+                        "schema": {
+                            "$ref": "#/definitions/CustomTags"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Overwrite current custom User tags with the given tags",
+                "description": "An array of maps specifying tags under each tag group, for example:\n\n{'impacts' => ['sales']},\n{'resources' => ['dev', 'test', 'support']\n}",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number",
+                        "description": "Receptive's User ID"
+                    },
+                    {
+                        "name": "tags",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/CustomTags"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated User tags",
+                        "schema": {
+                            "$ref": "#/definitions/CustomTags"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Delete custom User tags",
+                "description": "Removes all custom tags associated with the User",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "number",
+                        "description": "Receptive's User ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
                     }
                 }
             }
@@ -288,6 +543,18 @@
                 },
                 "status": {
                     "type": "string"
+                }
+            }
+        },
+        "CustomTags": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             }
         },
