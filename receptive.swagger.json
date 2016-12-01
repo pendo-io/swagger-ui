@@ -43,7 +43,6 @@
                         "required": true,
                         "type": "number",
                         "description": "Receptive's Account ID"
-
                     }
                 ],
                 "responses": {
@@ -128,7 +127,6 @@
                         "required": true,
                         "type": "number",
                         "description": "Receptive's Feature ID"
-
                     }
                 ],
                 "responses": {
@@ -323,7 +321,6 @@
                         "required": true,
                         "type": "number",
                         "description": "Receptive's User ID"
-
                     }
                 ],
                 "responses": {
