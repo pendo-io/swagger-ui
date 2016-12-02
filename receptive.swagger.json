@@ -47,10 +47,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "the custom Account tags",
-                        "schema": {
-                            "$ref": "#/definitions/CustomTags"
-                        }
+                        "description": "Returns an array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]"
                     },
                     "404": {
                         "description": "Account not found"
@@ -74,18 +71,15 @@
                         "name": "tags",
                         "required": true,
                         "in": "body",
-                        "description": "An array of maps specifying tags under each tag group, for example:\n\n{'impacts' => ['sales']},\n{'resources' => ['dev', 'test', 'support']\n}",
+                        "description": "An array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]",
                         "schema": {
-                            "$ref": "#/definitions/CustomTags"
+                            "$ref": "#/definitions/Tags"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Updated Account tags",
-                        "schema": {
-                            "$ref": "#/definitions/CustomTags"
-                        }
+                        "description": "Updated Account tags"
                     },
                     "404": {
                         "description": "Account not found"
@@ -131,10 +125,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "the custom Feature tags",
-                        "schema": {
-                            "$ref": "#/definitions/CustomTags"
-                        }
+                        "description": "Returns an array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]"
                     },
                     "404": {
                         "description": "Feature not found"
@@ -158,18 +149,15 @@
                         "name": "tags",
                         "required": true,
                         "in": "body",
-                        "description": "An array of maps specifying tags under each tag group, for example:\n\n{'impacts' => ['sales']},\n{'resources' => ['dev', 'test', 'support']\n}",
+                        "description": "An array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]",
                         "schema": {
-                            "$ref": "#/definitions/CustomTags"
+                            "$ref": "#/definitions/Tags"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Updated Feature tags",
-                        "schema": {
-                            "$ref": "#/definitions/CustomTags"
-                        }
+                        "description": "Updated Feature tags"
                     },
                     "404": {
                         "description": "Feature not found"
@@ -325,10 +313,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "the custom User tags",
-                        "schema": {
-                            "$ref": "#/definitions/CustomTags"
-                        }
+                      "description": "Returns an array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]"
                     },
                     "404": {
                         "description": "User not found"
@@ -340,7 +325,6 @@
                     "user"
                 ],
                 "summary": "Overwrite current custom User tags with the given tags",
-                "description": "An array of maps specifying tags under each tag group, for example:\n\n{'impacts' => ['sales']},\n{'resources' => ['dev', 'test', 'support']\n}",
                 "parameters": [
                     {
                         "name": "id",
@@ -353,17 +337,15 @@
                         "name": "tags",
                         "required": true,
                         "in": "body",
+                        "description": "An array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]",
                         "schema": {
-                            "$ref": "#/definitions/CustomTags"
+                            "$ref": "#/definitions/Tags"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Updated User tags",
-                        "schema": {
-                            "$ref": "#/definitions/CustomTags"
-                        }
+                        "description": "Updated User tags"
                     },
                     "404": {
                         "description": "User not found"
@@ -543,17 +525,8 @@
                 }
             }
         },
-        "CustomTags": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "additionalProperties": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
+        "Tags": {
+            "type": "object"
         },
         "User": {
             "type": "object",
