@@ -204,6 +204,33 @@
                 }
             }
         },
+        "/users/search": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Find a User",
+                "parameters": [
+                    {
+                        "name": "external_id",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "the User record",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "410": {
+                        "description": "User has been deleted"
+                    }
+                }
+            }
+        },
         "/users/{id}": {
             "get": {
                 "tags": [
@@ -313,7 +340,7 @@
                 ],
                 "responses": {
                     "200": {
-                      "description": "Returns an array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]"
+                        "description": "Returns an array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]"
                     },
                     "404": {
                         "description": "User not found"
@@ -548,6 +575,9 @@
                     "format": "dateTime"
                 },
                 "full_name": {
+                    "type": "string"
+                },
+                "external_id": {
                     "type": "string"
                 }
             }
