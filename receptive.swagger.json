@@ -283,6 +283,9 @@
                                 "email": {
                                     "type": "string"
                                 },
+                                "external_id": {
+                                    "type": "string"
+                                },
                                 "permission_group_id": {
                                     "type": "number",
                                     "format": "integer"
