@@ -29,6 +29,32 @@
             "userApiKey": []
         }
     ],
+    "parameters": {
+        "limit": {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "description": "Limit the number of records returned"
+        },
+        "order_by": {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The field to use for sort"
+        },
+        "order_dir": {
+            "name": "order_dir",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The sort direction",
+						"enum": [
+								"asc", "desc"
+						]
+        }
+    },
     "paths": {
         "/accounts/{id}/tags": {
             "get": {
@@ -406,6 +432,53 @@
             }
         },
         "/users": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "fetch User records",
+                "description": "get a list of User records",
+                "parameters": [
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "type": "string",
+                        "description": "role",
+												"required": true,
+                        "enum": [
+                            "endUser",
+                            "vendorUser"
+                        ]
+                    },
+										{
+												"name": "account",
+												"in": "query",
+												"type": "integer",
+												"description": "Filter by Account ID, if supplied. Only useful if role param is endUser",
+												"required": false
+										},
+										{
+												"$ref": "#/parameters/limit"
+										},
+										{
+												"$ref": "#/parameters/order_by"
+										},
+										{
+												"$ref": "#/parameters/order_dir"
+										}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User records",
+												"schema": {
+														"type": "array",
+														"items": {
+																"$ref": "#/definitions/User"
+														}
+												}
+                    }
+                }
+            },
             "post": {
                 "consumes": [
                     "application/json"
