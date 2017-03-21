@@ -593,27 +593,30 @@
                     "type": "string"
                 },
                 "user": {
-                    "roles": {
-                        "type": "string",
-                        "enum": [
-                            "endUser"
-                        ]
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "string"
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "format": "dateTime"
-                    },
-                    "full_name": {
-                        "type": "string"
-                    },
-                    "external_id": {
-                        "type": "string"
+                    "type": "object",
+                    "properties": {
+                        "roles": {
+                            "type": "string",
+                            "enum": [
+                                "endUser"
+                            ]
+                        },
+                        "email": {
+                            "type": "string"
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "created_at": {
+                            "type": "string",
+                            "format": "dateTime"
+                        },
+                        "full_name": {
+                            "type": "string"
+                        },
+                        "external_id": {
+                            "type": "string"
+                        }
                     }
                 },
                 "account": {
