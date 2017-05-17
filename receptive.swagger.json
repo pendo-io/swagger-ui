@@ -626,6 +626,9 @@
                 },
                 "status": {
                     "type": "string"
+                },
+                "tags": {
+                    "type": "object"
                 }
             }
         },
@@ -689,6 +692,9 @@
                         },
                         "external_id": {
                             "type": "string"
+                        },
+                        "tags": {
+                            "type": "object"
                         }
                     }
                 },
