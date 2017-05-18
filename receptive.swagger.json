@@ -1,707 +1,712 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "1.0.0",
-        "title": "Receptive API",
-        "description": "## Who is this for?\n\nThis documentation is for developers creating their own integration with [Receptive's](https://www.receptive.io) API. If you are doing a standard integration, there's a really easy [Javascript integration](https://help.receptive.io/hc/en-us/articles/209221969-How-to-integrate-Receptive-with-your-app) that you should know about before you go to the effort of building your own integration.\n\n## Authentication\n\nAPI calls generally need to be authenticated. Generate an API Key at https://receptive.io/app/#/integrate. This key should then be added to every request URL as a query parameter named 'auth-token'\n\n## Endpoint\n\nAPI endpoint is https://api.eu-west-1.receptive.io.\n## Notes\n\nAPI endpoints are being added to this documentation as needed by customers. If you don't see an endpoint you need please contact support and if it exists we'll publish the docs here. The 'try it out' feature on this documentation page will probably be blocked by your browser because the Access-Control-Allow-Origin header has its value set by the Receptive server depending on your hostname.\n\n## Generating client code\n\nThis documentation is automatically generated from an OpenAPI spec available [here](http://apidoc.receptive.io/receptive.swagger.json). You can use Swagger to auto-generate API client code in many languages using the [Swagger Editor](http://editor.swagger.io/#/)",
-        "contact": {
-            "name": "Receptive Support",
-            "email": "support@receptive.io"
-        }
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Receptive API",
+    "description": "## Who is this for?\n\nThis documentation is for developers creating their own integration with [Receptive's](https://www.receptive.io) API. If you are doing a standard integration, there's a really easy [Javascript integration](https://help.receptive.io/hc/en-us/articles/209221969-How-to-integrate-Receptive-with-your-app) that you should know about before you go to the effort of building your own integration.\n\n## Authentication\n\nAPI calls generally need to be authenticated. Generate an API Key at https://receptive.io/app/#/integrate. This key should then be added to every request URL as a query parameter named 'auth-token'\n\n## Endpoint\n\nAPI endpoint is https://api.eu-west-1.receptive.io.\n## Notes\n\nAPI endpoints are being added to this documentation as needed by customers. If you don't see an endpoint you need please contact support and if it exists we'll publish the docs here. The 'try it out' feature on this documentation page will probably be blocked by your browser because the Access-Control-Allow-Origin header has its value set by the Receptive server depending on your hostname.\n\n## Generating client code\n\nThis documentation is automatically generated from an OpenAPI spec available [here](http://apidoc.receptive.io/receptive.swagger.json). You can use Swagger to auto-generate API client code in many languages using the [Swagger Editor](http://editor.swagger.io/#/)",
+    "contact": {
+      "name": "Receptive Support",
+      "email": "support@receptive.io"
+    }
+  },
+  "host": "api.eu-west-1.receptive.io",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "userApiKey": {
+      "description": "Generate an API Key at https://receptive.io/app/#/integrate. This key should then be added to every request URL as a query parameter.",
+      "type": "apiKey",
+      "name": "auth-token",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "userApiKey": []
+    }
+  ],
+  "parameters": {
+    "limit": {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "type": "number",
+      "description": "Limit the number of records returned"
     },
-    "host": "api.eu-west-1.receptive.io",
-    "schemes": [
-        "https"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "securityDefinitions": {
-        "userApiKey": {
-            "description": "Generate an API Key at https://receptive.io/app/#/integrate. This key should then be added to every request URL as a query parameter.",
-            "type": "apiKey",
-            "name": "auth-token",
-            "in": "query"
-        }
+    "order_by": {
+      "name": "order_by",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The field to use for sort"
     },
-    "security": [
-        {
-            "userApiKey": []
-        }
-    ],
-    "parameters": {
-        "limit": {
-            "name": "limit",
-            "in": "query",
-            "required": false,
+    "order_dir": {
+      "name": "order_dir",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The sort direction",
+      "enum": [
+        "asc",
+        "desc"
+      ]
+    }
+  },
+  "paths": {
+    "/accounts/{id}/tags": {
+      "get": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Get custom Account tags",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
             "type": "number",
-            "description": "Limit the number of records returned"
-        },
-        "order_by": {
-            "name": "order_by",
+            "description": "Receptive's Account ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]"
+          },
+          "404": {
+            "description": "Account not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Overwrite current custom Account tags with the given tags",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Receptive's Account ID"
+          },
+          {
+            "name": "tags",
+            "required": true,
+            "in": "body",
+            "description": "An array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]",
+            "schema": {
+              "$ref": "#/definitions/Tags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Account tags"
+          },
+          "404": {
+            "description": "Account not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Delete custom Account tags",
+        "description": "Removes all custom tags associated with the Account",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Receptive's Account ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/features/{id}/tags": {
+      "get": {
+        "tags": [
+          "feature"
+        ],
+        "summary": "Get custom Feature tags",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Receptive's Feature ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]"
+          },
+          "404": {
+            "description": "Feature not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "feature"
+        ],
+        "summary": "Overwrite current custom Feature tags with the given tags",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Receptive's Feature ID"
+          },
+          {
+            "name": "tags",
+            "required": true,
+            "in": "body",
+            "description": "An array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]",
+            "schema": {
+              "$ref": "#/definitions/Tags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Feature tags"
+          },
+          "404": {
+            "description": "Feature not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "feature"
+        ],
+        "summary": "Delete custom Feature tags",
+        "description": "Removes all custom tags associated with the Feature",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Receptive's Feature ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/health-check/ping": {
+      "get": {
+        "security": [],
+        "tags": [
+          "system"
+        ],
+        "summary": "Health check for API",
+        "description": "Provides a response for automatic checks that the API and load balancers are healthy",
+        "responses": {
+          "200": {
+            "description": "API is healthy"
+          },
+          "503": {
+            "description": "Load balancers cannot route a request to a healthy API server"
+          }
+        }
+      }
+    },
+    "/users/search": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Find a User with a query",
+        "parameters": [
+          {
+            "description": "Find using your external ID, rather than the ID generated by Receptive",
+            "name": "external_id",
             "in": "query",
             "required": false,
-            "type": "string",
-            "description": "The field to use for sort"
-        },
-        "order_dir": {
-            "name": "order_dir",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The sort direction",
-						"enum": [
-								"asc", "desc"
-						]
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the User record",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "410": {
+            "description": "User has been deleted"
+          }
         }
+      }
     },
-    "paths": {
-        "/accounts/{id}/tags": {
-            "get": {
-                "tags": [
-                    "account"
-                ],
-                "summary": "Get custom Account tags",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "number",
-                        "description": "Receptive's Account ID"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Returns an array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]"
-                    },
-                    "404": {
-                        "description": "Account not found"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "account"
-                ],
-                "summary": "Overwrite current custom Account tags with the given tags",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "number",
-                        "description": "Receptive's Account ID"
-                    },
-                    {
-                        "name": "tags",
-                        "required": true,
-                        "in": "body",
-                        "description": "An array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]",
-                        "schema": {
-                            "$ref": "#/definitions/Tags"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Updated Account tags"
-                    },
-                    "404": {
-                        "description": "Account not found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "account"
-                ],
-                "summary": "Delete custom Account tags",
-                "description": "Removes all custom tags associated with the Account",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "number",
-                        "description": "Receptive's Account ID"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success"
-                    }
-                }
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get a User record",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the User record",
+            "schema": {
+              "$ref": "#/definitions/User"
             }
-        },
-        "/features/{id}/tags": {
-            "get": {
-                "tags": [
-                    "feature"
-                ],
-                "summary": "Get custom Feature tags",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "number",
-                        "description": "Receptive's Feature ID"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Returns an array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]"
-                    },
-                    "404": {
-                        "description": "Feature not found"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "feature"
-                ],
-                "summary": "Overwrite current custom Feature tags with the given tags",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "number",
-                        "description": "Receptive's Feature ID"
-                    },
-                    {
-                        "name": "tags",
-                        "required": true,
-                        "in": "body",
-                        "description": "An array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]",
-                        "schema": {
-                            "$ref": "#/definitions/Tags"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Updated Feature tags"
-                    },
-                    "404": {
-                        "description": "Feature not found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "feature"
-                ],
-                "summary": "Delete custom Feature tags",
-                "description": "Removes all custom tags associated with the Feature",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "number",
-                        "description": "Receptive's Feature ID"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success"
-                    }
-                }
-            }
-        },
-        "/health-check/ping": {
-            "get": {
-                "security": [],
-                "tags": [
-                    "system"
-                ],
-                "summary": "Health check for API",
-                "description": "Provides a response for automatic checks that the API and load balancers are healthy",
-                "responses": {
-                    "200": {
-                        "description": "API is healthy"
-                    },
-                    "503": {
-                        "description": "Load balancers cannot route a request to a healthy API server"
-                    }
-                }
-            }
-        },
-        "/users/search": {
-            "get": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "Find a User with a query",
-                "parameters": [
-                    {
-                        "description": "Find using your external ID, rather than the ID generated by Receptive",
-                        "name": "external_id",
-                        "in": "query",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "the User record",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    },
-                    "410": {
-                        "description": "User has been deleted"
-                    }
-                }
-            }
-        },
-        "/users/{id}": {
-            "get": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "Get a User record",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "number"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "the User record",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    },
-                    "410": {
-                        "description": "User has been deleted"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "Update a User",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "number",
-                        "description": "Receptive's User ID"
-                    },
-                    {
-                        "name": "user",
-                        "in": "body",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "email": {
-                                    "type": "string"
-                                },
-                                "external_id": {
-                                    "type": "string"
-                                },
-                                "permission_group_id": {
-                                    "type": "number",
-                                    "format": "integer"
-                                }
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "updated User",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "Delete a User",
-                "description": "This removes most traces of a User's existence from the system. For an EndUser you might want to consider just letting them churn after a period of inactivity.",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "number"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "the deleted User",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/{id}/tags": {
-            "get": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "Get custom User tags",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "number",
-                        "description": "Receptive's User ID"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Returns an array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]"
-                    },
-                    "404": {
-                        "description": "User not found"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "Overwrite current custom User tags with the given tags",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "number",
-                        "description": "Receptive's User ID"
-                    },
-                    {
-                        "name": "tags",
-                        "required": true,
-                        "in": "body",
-                        "description": "An array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]",
-                        "schema": {
-                            "$ref": "#/definitions/Tags"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Updated User tags"
-                    },
-                    "404": {
-                        "description": "User not found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "Delete custom User tags",
-                "description": "Removes all custom tags associated with the User",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "number",
-                        "description": "Receptive's User ID"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success"
-                    }
-                }
-            }
-        },
-        "/users": {
-            "get": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "fetch User records",
-                "description": "get a list of User records",
-                "parameters": [
-                    {
-                        "name": "role",
-                        "in": "query",
-                        "type": "string",
-                        "description": "role",
-												"required": true,
-                        "enum": [
-                            "endUser",
-                            "vendorUser"
-                        ]
-                    },
-										{
-												"name": "account",
-												"in": "query",
-												"type": "integer",
-												"description": "Filter by Account ID, if supplied. Only useful if role param is endUser",
-												"required": false
-										},
-										{
-												"$ref": "#/parameters/limit"
-										},
-										{
-												"$ref": "#/parameters/order_by"
-										},
-										{
-												"$ref": "#/parameters/order_dir"
-										}
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User records",
-												"schema": {
-														"type": "array",
-														"items": {
-																"$ref": "#/definitions/User"
-														}
-												}
-                    }
-                }
-            },
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "tags": [
-                    "user"
-                ],
-                "summary": "Ping to create or update an EndUser and Account in one call",
-                "description": "Replicates much of the functionality of the widget ping, allowing callers to create or update User records for End Users. If you call this with a new User and/or Account, the record will be created. If you call for an existing User/Account, the record will be updated. You can also call this at EndUser login time, or more frequently, to notify Receptive that the EndUser has been seen. This keeps Receptive's 'last seen' data fresh and updates your reporting. This endpoint is used by our Zapier integration. The only value allowed in user.roles is 'endUser'. The id you supply here for the User and Account should be your own unique id, which Receptive calls external_id. This probably isn't the same as Receptive's id seen elsewhere in the API.",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "description": "the account and user",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/EndUserPing"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    }
-                }
-            }
-        },
-        "/users/invite_vendor_user": {
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "tags": [
-                    "user",
-                    "team"
-                ],
-                "summary": "Invite a VendorUser (Team member)",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "team": {
-                                    "type": "string"
-                                },
-                                "permission_group_id": {
-                                    "type": "number",
-                                    "format": "integer"
-                                },
-                                "email": {
-                                    "type": "string"
-                                },
-                                "full_name": {
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success"
-                    }
-                }
-            }
-        },
-        "/users/invite_end_user": {
-            "post": {
-                "tags": [
-                    "user"
-                ],
-                "summary": "Invite an EndUser (customer)",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "email": {
-                                    "type": "string"
-                                },
-                                "send_invite": {
-                                    "type": "boolean"
-                                },
-                                "full_name": {
-                                    "type": "string"
-                                },
-                                "user_external_id": {
-                                    "type": "string"
-                                },
-                                "account_external_id": {
-                                    "type": "string"
-                                },
-                                "account_name": {
-                                    "type": "string"
-                                },
-                                "monthly_value": {
-                                    "type": "number",
-                                    "format": "float"
-                                },
-                                "account_status": {
-                                    "enum": [
-                                        "prospect",
-                                        "not_paying",
-                                        "paying"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success"
-                    }
-                }
-            }
+          },
+          "410": {
+            "description": "User has been deleted"
+          }
         }
-    },
-    "definitions": {
-        "Account": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "is_paying": {
-                    "type": "boolean"
-                },
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update a User",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Receptive's User ID"
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "name": {
-                    "type": "string"
-                },
-                "created_at": {
-                    "type": "string",
-                    "format": "dateTime"
-                },
-                "monthly_value": {
-                    "type": "number",
-                    "format": "float"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "tags": {
-                    "type": "object"
-                }
-            }
-        },
-        "Tags": {
-            "type": "object"
-        },
-        "User": {
-            "type": "object",
-            "properties": {
-                "roles": {
-                    "type": "string",
-                    "enum": [
-                        "endUser"
-                    ]
+                  "type": "string"
                 },
                 "email": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "created_at": {
-                    "type": "string",
-                    "format": "dateTime"
-                },
-                "name": {
-                    "type": "string"
+                  "type": "string"
                 },
                 "external_id": {
-                    "type": "string"
-                }
-            }
-        },
-        "EndUserPing": {
-            "type": "object",
-            "properties": {
-                "return_url": {
-                    "type": "string"
+                  "type": "string"
                 },
-                "user": {
-                    "type": "object",
-                    "properties": {
-                        "roles": {
-                            "type": "string",
-                            "enum": [
-                                "endUser"
-                            ]
-                        },
-                        "email": {
-                            "type": "string"
-                        },
-                        "id": {
-                            "type": "string"
-                        },
-                        "created_at": {
-                            "type": "string",
-                            "format": "dateTime"
-                        },
-                        "full_name": {
-                            "type": "string"
-                        },
-                        "external_id": {
-                            "type": "string"
-                        },
-                        "tags": {
-                            "type": "object"
-                        }
-                    }
-                },
-                "account": {
-                    "$ref": "#/definitions/Account"
+                "permission_group_id": {
+                  "type": "number",
+                  "format": "integer"
                 }
+              }
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "updated User",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
         }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete a User",
+        "description": "This removes most traces of a User's existence from the system. For an EndUser you might want to consider just letting them churn after a period of inactivity.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the deleted User",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}/tags": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get custom User tags",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Receptive's User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Overwrite current custom User tags with the given tags",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Receptive's User ID"
+          },
+          {
+            "name": "tags",
+            "required": true,
+            "in": "body",
+            "description": "An array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]",
+            "schema": {
+              "$ref": "#/definitions/Tags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated User tags"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete custom User tags",
+        "description": "Removes all custom tags associated with the User",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Receptive's User ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "fetch User records",
+        "description": "get a list of User records",
+        "parameters": [
+          {
+            "name": "role",
+            "in": "query",
+            "type": "string",
+            "description": "role",
+            "required": true,
+            "enum": [
+              "endUser",
+              "vendorUser"
+            ]
+          },
+          {
+            "name": "account",
+            "in": "query",
+            "type": "integer",
+            "description": "Filter by Account ID, if supplied. Only useful if role param is endUser",
+            "required": false
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/order_by"
+          },
+          {
+            "$ref": "#/parameters/order_dir"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User records",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "user"
+        ],
+        "summary": "Ping to create or update an EndUser and Account in one call",
+        "description": "Replicates much of the functionality of the widget ping, allowing callers to create or update User records for End Users. If you call this with a new User and/or Account, the record will be created. If you call for an existing User/Account, the record will be updated. You can also call this at EndUser login time, or more frequently, to notify Receptive that the EndUser has been seen. This keeps Receptive's 'last seen' data fresh and updates your reporting. This endpoint is used by our Zapier integration. The only value allowed in user.roles is 'endUser'. The id you supply here for the User and Account should be your own unique id, which Receptive calls external_id. This probably isn't the same as Receptive's id seen elsewhere in the API.",
+        "parameters": [
+          {
+            "name": "data",
+            "description": "the account and user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EndUserPing"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/users/invite_vendor_user": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "user",
+          "team"
+        ],
+        "summary": "Invite a VendorUser (Team member)",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "team": {
+                  "type": "string"
+                },
+                "permission_group_id": {
+                  "type": "number",
+                  "format": "integer"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "full_name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/users/invite_end_user": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Invite an EndUser (customer)",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "send_invite": {
+                  "type": "boolean"
+                },
+                "full_name": {
+                  "type": "string"
+                },
+                "user_external_id": {
+                  "type": "string"
+                },
+                "account_external_id": {
+                  "type": "string"
+                },
+                "account_name": {
+                  "type": "string"
+                },
+                "monthly_value": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "account_status": {
+                  "enum": [
+                    "prospect",
+                    "not_paying",
+                    "paying"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
     }
+  },
+  "definitions": {
+    "Account": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "is_paying": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "dateTime"
+        },
+        "monthly_value": {
+          "type": "number",
+          "format": "float"
+        },
+        "status": {
+          "type": "string"
+        },
+        "tags": {
+          "$ref": "#/definitions/Tags"
+        }
+      }
+    },
+    "Tags": {
+      "description": "Simple tags are supplied as an array of Strings e.g. ['Foo', 'Bar']. To put the tags in categories replace the Strings with maps of TagCategory->TagValue, for example [{Color:Red}, {Flavor:Cherry}] simple and categorised tags can be mixed in the same array.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "roles": {
+          "type": "string",
+          "enum": [
+            "endUser"
+          ]
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "dateTime"
+        },
+        "name": {
+          "type": "string"
+        },
+        "external_id": {
+          "type": "string"
+        }
+      }
+    },
+    "EndUserPing": {
+      "type": "object",
+      "properties": {
+        "return_url": {
+          "type": "string"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "roles": {
+              "type": "string",
+              "enum": [
+                "endUser"
+              ]
+            },
+            "email": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string",
+              "format": "dateTime"
+            },
+            "full_name": {
+              "type": "string"
+            },
+            "external_id": {
+              "type": "string"
+            },
+            "tags": {
+              "$ref": "#/definitions/Tags"
+            }
+          }
+        },
+        "account": {
+          "$ref": "#/definitions/Account"
+        }
+      }
+    }
+  }
 }
