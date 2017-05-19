@@ -176,7 +176,6 @@
             "name": "tags",
             "required": true,
             "in": "body",
-            "description": "An array of maps specifying tags under each tag group, for example:\n\n[\n\n{'impacts' => ['sales']},\n\n{'resources' => ['dev', 'test', 'support']}\n\n]",
             "schema": {
               "$ref": "#/definitions/Tags"
             }
@@ -634,7 +633,7 @@
       }
     },
     "Tags": {
-      "description": "Simple tags are supplied as an array of Strings e.g. ['Foo', 'Bar']. To put the tags in categories replace the Strings with maps of TagCategory->TagValue, for example [{Color:Red}, {Flavor:Cherry}] simple and categorised tags can be mixed in the same array.",
+      "description": "Simple tags are supplied as an array of Strings e.g ['Foo', 'Bar']. \nTo put the tags in categories replace the Strings with maps of using tag category as the key and tag value as the value, e.g \n\n[\n{Color:Red}, {Flavor:Cherry}\n]. Simple and categorised tags can be mixed in the same array.",
       "type": "array",
       "items": {
         "type": "string"
