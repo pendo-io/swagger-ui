@@ -243,7 +243,25 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "description": "Find user by their email address. Role param must be specified when using this option",
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Users role ('vendorUser' or 'endUser'). Only useful when finding a user by their email address",
+            "name": "role",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "endUser",
+              "vendorUser"
+            ]
           }
+
         ],
         "responses": {
           "200": {
@@ -639,6 +657,7 @@
         "type": "string"
       }
     },
+
     "User": {
       "type": "object",
       "properties": {
