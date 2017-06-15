@@ -40,9 +40,18 @@
     "limit": {
       "name": "limit",
       "in": "query",
+      "minimum": 0,
       "required": false,
       "type": "number",
       "description": "Limit the number of records returned"
+    },
+    "start": {
+      "name": "start",
+      "in": "query",
+      "required": false,
+      "type": "number",
+      "minimum": 0,
+      "description": "Offset to start at"
     },
     "order_by": {
       "name": "order_by",
@@ -77,6 +86,48 @@
     }
   },
   "paths": {
+    "/accounts": {
+      "get": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Query accounts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/start"
+          },
+          {
+            "$ref": "#/parameters/order_dir"
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "churned",
+              "last_seen",
+              "name"
+            ],
+            "description": "The field to use for sort"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Account"
+              }
+            }
+          }
+        }
+      }
+    },
     "/accounts/{id}": {
       "get": {
         "tags": [
@@ -402,7 +453,6 @@
                   "type": "number",
                   "format": "integer",
                   "description": "only valid for users with role 'vendorUser'"
-
                 }
               }
             }
@@ -714,6 +764,10 @@
         },
         "status": {
           "type": "string"
+        },
+        "external_id": {
+          "type": "string",
+          "description": "ID for the Account, provided by the Receptive Customer"
         }
       }
     },
