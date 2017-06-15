@@ -400,7 +400,9 @@
                 },
                 "permission_group_id": {
                   "type": "number",
-                  "format": "integer"
+                  "format": "integer",
+                  "description": "only valid for users with role 'vendorUser'"
+
                 }
               }
             }
