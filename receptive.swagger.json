@@ -57,6 +57,53 @@
     }
   },
   "paths": {
+    "/accounts/{id}": {
+      "put": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Update an Account record",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Receptive's Account ID"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "description": "Updated Account values",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "monthly_value": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "paying",
+                    "prospect",
+                    "not_paying"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/accounts/{id}/tags": {
       "get": {
         "tags": [
@@ -261,7 +308,6 @@
               "vendorUser"
             ]
           }
-
         ],
         "responses": {
           "200": {
@@ -657,7 +703,6 @@
         "type": "string"
       }
     },
-
     "User": {
       "type": "object",
       "properties": {
