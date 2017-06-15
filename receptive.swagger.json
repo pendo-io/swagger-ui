@@ -830,7 +830,7 @@
           }
         },
         "account": {
-          "$ref": "#/definitions/Account"
+          "$ref": "#/definitions/AccountWithTags"
         }
       }
     }
