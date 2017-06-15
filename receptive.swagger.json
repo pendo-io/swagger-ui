@@ -150,11 +150,7 @@
         "summary": "Get custom Account tags",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "number",
-            "description": "Receptive's Account ID"
+            "$ref": "#/parameters/accountIdInPath"
           }
         ],
         "responses": {
@@ -173,11 +169,7 @@
         "summary": "Overwrite current custom Account tags with the given tags",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "number",
-            "description": "Receptive's Account ID"
+            "$ref": "#/parameters/accountIdInPath"
           },
           {
             "name": "tags",
@@ -206,11 +198,7 @@
         "description": "Removes all custom tags associated with the Account",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "number",
-            "description": "Receptive's Account ID"
+            "$ref": "#/parameters/accountIdInPath"
           }
         ],
         "responses": {
@@ -228,11 +216,7 @@
         "summary": "Get custom Feature tags",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "number",
-            "description": "Receptive's Feature ID"
+            "$ref": "#/parameters/accountIdInPath"
           }
         ],
         "responses": {
