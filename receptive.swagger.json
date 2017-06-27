@@ -674,6 +674,9 @@
                 },
                 "full_name": {
                   "type": "string"
+                },
+                "external_id": {
+                  "type": "string"
                 }
               }
             }
@@ -739,7 +742,53 @@
           }
         }
       }
-    }
+    },
+    "/vendor_users": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "user",
+          "team"
+        ],
+        "summary": "Create or update a team member",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "team": {
+                  "type": "string",
+                  "description": "A comma seperated list of teams the user belongs to"
+                },
+                "permission_group_id": {
+                  "type": "number",
+                  "format": "integer"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "full_name": {
+                  "type": "string"
+                },
+                "external_id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
   },
   "definitions": {
     "Account": {
