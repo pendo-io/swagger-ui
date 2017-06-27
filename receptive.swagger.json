@@ -661,6 +661,10 @@
             "required": true,
             "schema": {
               "type": "object",
+              "required": [
+                "email",
+                "full_name"
+              ],
               "properties": {
                 "team": {
                   "type": "string"
@@ -788,7 +792,7 @@
           }
         }
       }
-    },
+    }
   },
   "definitions": {
     "Account": {
