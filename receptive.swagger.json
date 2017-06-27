@@ -752,7 +752,7 @@
           "user",
           "team"
         ],
-        "summary": "Create or update a team member",
+        "summary": "Create or update a team member by their external_id",
         "parameters": [
           {
             "name": "data",
