@@ -706,6 +706,9 @@
             "required": true,
             "schema": {
               "type": "object",
+              "required": [
+                "account_status"
+              ],
               "properties": {
                 "email": {
                   "type": "string"
@@ -730,6 +733,7 @@
                   "format": "float"
                 },
                 "account_status": {
+                  "type": "string",
                   "enum": [
                     "prospect",
                     "not_paying",
