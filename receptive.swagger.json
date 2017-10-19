@@ -996,7 +996,7 @@
         "status_changed_at": {
           "type": "string"
         },
-        "merged_to_case_id": {
+        "merged_to_feature_id": {
           "type": "integer",
           "description": "If this Feature was merged into another, the ID of the preserved Feature"
         },
