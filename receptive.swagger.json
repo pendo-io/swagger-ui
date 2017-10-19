@@ -259,6 +259,31 @@
         }
       }
     },
+    "/features/{id}": {
+      "get": {
+        "tags": [
+          "feature"
+        ],
+        "summary": "Get a Feature by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "integer",
+            "required": true,
+            "description": "ID of the feature"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        }
+      }
+    },
     "/features/{id}/tags": {
       "get": {
         "tags": [
@@ -901,6 +926,111 @@
         },
         "tags": {
           "$ref": "#/definitions/Tags"
+        }
+      }
+    },
+    "Feature": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "resolution": {
+          "type": "string",
+          "description": "The latest Resolution set by the VendorUser"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "new",
+            "waiting",
+            "planned",
+            "developing",
+            "released",
+            "declined"
+          ]
+        },
+        "vendor_id": {
+          "type": "integer"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "created_by_user_id": {
+          "type": "integer"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "declined_at": {
+          "type": "string"
+        },
+        "developing_at": {
+          "type": "string"
+        },
+        "planned_at": {
+          "type": "string"
+        },
+        "released_at": {
+          "type": "string"
+        },
+        "waiting_at": {
+          "type": "string"
+        },
+        "updated_by_user_id": {
+          "type": "integer"
+        },
+        "resolved_by_user_id": {
+          "type": "integer"
+        },
+        "app_url": {
+          "type": "string",
+          "description": "URL for this Feature"
+        },
+        "status_changed_at": {
+          "type": "string"
+        },
+        "merged_to_case_id": {
+          "type": "integer",
+          "description": "If this Feature was merged into another, the ID of the preserved Feature"
+        },
+        "form_entry": {
+          "type": "string",
+          "description": "a JSON serialized version of the Form containing the description and other fields for this Feature."
+        },
+        "effort": {
+          "type": "integer",
+          "description": "How much Effort is assigned to the development of this Feature. Not visible to EndUsers"
+        },
+        "is_private": {
+          "type": "boolean",
+          "description": "Is this Feature hidden from EndUsers?"
+        },
+        "view_count": {
+          "type": "integer",
+          "description": "How many times has this Feature been viewed. May only be visible to VendorUsers, depending on config"
+        },
+        "tags": {
+          "$ref": "#/definitions/Tags"
+        },
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Products associated with this Feature"
+          }
+        },
+        "uploads": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
