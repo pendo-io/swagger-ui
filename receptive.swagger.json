@@ -796,6 +796,54 @@
           }
         }
       }
+    },
+    "/votes": {
+      "get": {
+        "tags": [
+          "votes"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "description": "Include only votes by User that voted on a feature.",
+            "in": "query",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "feature_id",
+            "description": "Include only votes for Feature with this Feature ID",
+            "in": "query",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "positive",
+            "description": "Include only votes that are positive",
+            "in": "query",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "negative",
+            "description": "Include only votes that are negative",
+            "in": "query",
+            "type": "boolean",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vote records",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Vote"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -928,6 +976,26 @@
         },
         "account": {
           "$ref": "#/definitions/AccountWithTags"
+        }
+      }
+    },
+    "Vote": {
+      "type": "object",
+      "properties": {
+        "feature_id": {
+          "type": "integer"
+        },
+        "user_id": {
+          "type": "integer"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
         }
       }
     }
