@@ -990,7 +990,7 @@
         },
         "quantity": {
           "type": "integer",
-          "description": "A negative number indicates that the User has indicated \"Not Interested\" in a Features. Between 0 and 100000 is the User's current prioritization of the Feature."
+          "description": "A negative number indicates that the User has indicated \"Not Interested\" in a Features. Between 0 and 1000000 is the User's current prioritization of the Feature."
         },
         "created_at": {
           "type": "string"
