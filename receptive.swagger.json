@@ -785,7 +785,8 @@
           "user",
           "team"
         ],
-        "summary": "Create or update a team member by their external_id",
+					"summary": "Create or update a team member by their external_id",
+					"description": "the POST /vendor_users is very similar to the POST /users/invite_vendor_user but /vendor_users is intended for consumers to refresh team member data periodically, rather than just a one-off user creation.",
         "parameters": [
           {
             "name": "data",
