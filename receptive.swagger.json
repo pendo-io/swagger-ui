@@ -785,8 +785,8 @@
           "user",
           "team"
         ],
-					"summary": "Create or update a team member by their external_id",
-					"description": "the POST /vendor_users is very similar to the POST /users/invite_vendor_user but /vendor_users is intended for consumers to refresh team member data periodically, rather than just a one-off user creation.",
+          "summary": "Create or update a team member by their external_id",
+          "description": "the POST /vendor_users is very similar to the POST /users/invite_vendor_user but /vendor_users is intended for consumers to refresh team member data periodically, rather than just a one-off user creation.",
         "parameters": [
           {
             "name": "data",
@@ -869,8 +869,41 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "votes"
+        ],
+        "summary": "update specified votes for a User",
+        "description": "Automatically subscribes/unsubscribes the User depending on the quantity value",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                },
+                "votes": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/FeatureVote"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated votes"
+          }
+        }
       }
-    }
+    },
   },
   "definitions": {
     "Account": {
@@ -899,6 +932,18 @@
         "external_id": {
           "type": "string",
           "description": "ID for the Account, provided by the Receptive Customer"
+        }
+      }
+    },
+    "FeatureVote": {
+      "type": "object",
+      "properties": {
+        "feature_id": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer",
+          "description": "Value between -1 and 1000000. -1 indicates that the User is \"Not Interested\" in the feature."
         }
       }
     },
