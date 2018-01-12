@@ -1088,7 +1088,7 @@
       }
     },
     "Products": {
-      "description": "Supplied as an array of maps where each map describes an existing or new product e.g [{id:exising_product_id, name:existing name}, {id:new_product_id, name:new product name}]. \nExisting product id/names can be referenced at https://receptive.io/app/#/vendor/products",
+      "description": "Supplied as an array of maps where each map describes an existing or new product e.g [{id:exising_product_id, name:existing name}, {id:new_product_id, name: new product name}]. \nExisting product id/names held in your account can be referenced at https://receptive.io/app/#/vendor/products",
       "type": "array",
       "items": {
         "type": "string"
