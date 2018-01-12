@@ -1149,9 +1149,6 @@
             "full_name": {
               "type": "string"
             },
-            "external_id": {
-              "type": "string"
-            },
             "tags": {
               "$ref": "#/definitions/Tags"
             },
