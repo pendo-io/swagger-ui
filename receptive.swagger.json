@@ -856,6 +856,22 @@
             "in": "query",
             "type": "boolean",
             "required": false
+          },
+          {
+            "name": "start",
+            "description": "Offset to start at",
+            "in": "query",
+            "type": "number",
+            "minimum": 0,
+            "required": false
+          },
+           {
+            "name": "limit",
+            "description": "Limit the number of records returned",
+            "in": "query",
+            "type": "number",
+            "minimum": 0,
+            "required": false
           }
         ],
         "responses": {
