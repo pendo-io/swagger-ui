@@ -259,6 +259,68 @@
         }
       }
     },
+    "/features": {
+      "get": {
+        "tags": [
+          "feature"
+        ],
+        "summary": "Query features",
+        "parameters": [
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/start"
+          },
+          {
+            "$ref": "#/parameters/order_dir"
+          },
+          {
+            "name": "is_private",
+            "description": "Filter by whether the features are shown/hidden from customer, if supplied.",
+            "in": "query",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "wanted_by",
+            "description": "Filter by User ID, if supplied.",
+            "in": "query",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "title",
+              "created_at",
+              "updated_at",
+              "declined_at",
+              "developing_at",
+              "planned_at",
+              "released_at",
+              "waiting_at",
+              "deleted_at"
+            ],
+            "description": "The field to use for sort"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Feature"
+              }
+            }
+          }
+        }
+      }
+    },
     "/features/{id}": {
       "get": {
         "tags": [
