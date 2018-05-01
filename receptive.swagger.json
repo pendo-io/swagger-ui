@@ -1196,6 +1196,32 @@
         },
         "external_id": {
           "type": "string"
+        },
+        "account": {
+          "$ref": "#/definitions/UserAccount"
+        }
+      }
+    },
+    "UserAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "monthly_value": {
+          "type": "number",
+          "format": "float"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "paying",
+            "prospect",
+            "not_paying"
+          ]
         }
       }
     },
