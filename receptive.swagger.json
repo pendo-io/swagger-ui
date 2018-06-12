@@ -191,6 +191,29 @@
             "description": "Success"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Delete an Account",
+        "description": "This removes most traces of an Accounts existence from the system.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the deleted Account",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        }
       }
     },
     "/accounts/{id}/tags": {
