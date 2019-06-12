@@ -291,7 +291,7 @@
         "parameters": [
           {
             "name": "scope",
-            "description": "Specifies the type of entity being searched for.",
+            "description": "Specifies the type of entity being searched for. Must be set to 'feature'",
             "in": "query",
             "type": "string",
             "required": true,
@@ -308,7 +308,7 @@
           },
           {
             "name": "status",
-            "description": "A comma seperated list of status values to filter by, if required",
+            "description": "A comma seperated list of status values to filter by, if required. Valid values: 'new', 'waiting', 'planned', 'developing', 'released', 'declined'.",
             "in": "query",
             "type": "string",
             "required": false,
