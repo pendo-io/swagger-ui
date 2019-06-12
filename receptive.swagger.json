@@ -282,6 +282,59 @@
         }
       }
     },
+    "/search": {
+      "get": {
+        "tags": [
+          "feature"
+        ],
+        "summary": "Search features",
+        "parameters": [
+          {
+            "name": "scope",
+            "description": "Specifies the type of entity being searched for.",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "enum": [
+              "feature"
+            ]
+          },
+          {
+            "name": "q",
+            "description": "The search term.",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "status",
+            "description": "A comma seperated list of status values to filter by, if required",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "new",
+              "waiting",
+              "planned",
+              "developing",
+              "released",
+              "declined"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Feature"
+              }
+            }
+          }
+        }
+      }
+    },
     "/features": {
       "get": {
         "tags": [
@@ -870,8 +923,8 @@
           "user",
           "team"
         ],
-          "summary": "Create or update a team member by their external_id",
-          "description": "the POST /vendor_users is very similar to the POST /users/invite_vendor_user but /vendor_users is intended for consumers to refresh team member data periodically, rather than just a one-off user creation.",
+        "summary": "Create or update a team member by their external_id",
+        "description": "the POST /vendor_users is very similar to the POST /users/invite_vendor_user but /vendor_users is intended for consumers to refresh team member data periodically, rather than just a one-off user creation.",
         "parameters": [
           {
             "name": "data",
@@ -950,7 +1003,7 @@
             "minimum": 0,
             "required": false
           },
-           {
+          {
             "name": "limit",
             "description": "Limit the number of records returned",
             "in": "query",
@@ -1004,7 +1057,7 @@
           }
         }
       }
-    },
+    }
   },
   "definitions": {
     "Account": {
