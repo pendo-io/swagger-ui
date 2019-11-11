@@ -1064,7 +1064,7 @@
           "hooks"
         ],
         "summary": "Subscribe to web hooks",
-        "description": "Use this endpoint to subscribe to webhooks. Pass other event fields in the body",
+        "description": "Use this endpoint to subscribe to webhooks.",
         "parameters": [
           {
             "name": "data",
@@ -1074,13 +1074,12 @@
               "type": "object",
               "properties": {
                 "target_url": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "The target URL where the events will be sent to."
                 },
                 "event": {
-                  "type": "string"
-                },
-                "status": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "The event field can contain one of the following values-\n1) 'feature_created' - When a new feature is created\n2) 'feature_status_changed' - When a feature status is updated\n3) 'feature_comment_created' - When a commment is created on a feature"
                 }
               }
             }
@@ -1088,7 +1087,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Subscribed to the weebhooks"
+            "description": "Successfully subscribed to the weebhooks"
           }
         }
       }
@@ -1117,7 +1116,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfull unsubscribed from the weebhooks"
+            "description": "Successfully unsubscribed from the weebhooks"
           }
         }
       }
