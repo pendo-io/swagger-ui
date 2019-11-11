@@ -1063,7 +1063,7 @@
         "tags": [
           "hooks"
         ],
-        "summary": "Subscribe to web hooks",
+        "summary": "Subscribe to webhooks",
         "description": "Use this endpoint to subscribe to webhooks.",
         "parameters": [
           {
@@ -1079,7 +1079,7 @@
                 },
                 "event": {
                   "type": "string",
-                  "description": "The event field can contain one of the following values-\n1) 'feature_created' - When a new feature is created\n2) 'feature_status_changed' - When a feature status is updated\n3) 'feature_comment_created' - When a commment is created on a feature"
+                  "description": "The event field can contain one of the following values-\n1) 'feature_created' - When a new feature is created a webhook will be triggered with the details of the feature. Feature details can be found in the model section under Feature object\n2) 'feature_status_changed' - When a feature status is updated a webhook will be triggered with the updated Feature details. Feature details can be found in the model section under Feature object.\n3) 'feature_comment_created' - When a commment is created on a feature, a webhook will be triggered with the details about the Feature and the new comment. Feature and Comment details can be found in the model section under Feature object and Comment object."
                 }
               }
             }
@@ -1097,8 +1097,8 @@
         "tags": [
           "hooks"
         ],
-        "summary": "Unsubscribe from web hooks",
-        "description": "Use this endpoint to unsubscribe from webhooks",
+        "summary": "Unsubscribe from webhooks",
+        "description": "Use this endpoint to unsubscribe from a webhook",
         "parameters": [
           {
             "name": "data",
@@ -1423,6 +1423,32 @@
         },
         "updated_at": {
           "type": "string"
+        }
+      }
+    },
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "feature_id": {
+          "type": "integer"
+        },
+        "user_id": {
+          "type": "integer"
+        },
+        "text": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "dateTime"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "dateTime"
+        },
+        "is_private": {
+          "type": "boolean",
+          "description": "Is this Comment hidden from EndUsers?"
         }
       }
     }
