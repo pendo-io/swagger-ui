@@ -323,7 +323,14 @@
           },
           {
             "name": "tags",
-            "description": "Tags to limit results by - only applies when scope is 'case' or 'feature'. Multiple tags can be provided via comma delimeted string. Tags with contexts can be used, ie \"....&tags=TagExample,Multi:TagThis,Multi:TagThat\"",
+            "description": "Tags to limit results by - only applies when scope is 'case' or 'feature'. Multiple tags can be provided via comma delimeted string. Tags with contexts can be used. E.g. \"....&tags=TagExample,Multi:TagThis,Multi:TagThat\".",
+            "in": "query",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "products",
+            "description": "Products to limit results by. Comma delimeted string of either ids or names. E.g. \"...&products=1,2,3\" or \"...products=Product1,Product2\".",
             "in": "query",
             "type": "string",
             "required": false
