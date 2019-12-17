@@ -396,6 +396,20 @@
               "deleted_at"
             ],
             "description": "The field to use for sort"
+          },
+          {
+            "name": "tags",
+            "description": "Tags to limit results by. Multiple tags can be provided via comma delimeted string. Tags with contexts can be used. E.g. \"....&tags=TagExample,Multi:TagThis,Multi:TagThat\".",
+            "in": "query",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "products",
+            "description": "Products to limit results by. Comma delimeted string of either ids or names. E.g. \"...&products=1,2,3\" or \"...products=Product1,Product2\".",
+            "in": "query",
+            "type": "string",
+            "required": false
           }
         ],
         "responses": {
