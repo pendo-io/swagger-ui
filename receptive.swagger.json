@@ -349,6 +349,35 @@
         }
       }
     },
+    "/comments": {
+      "get": {
+        "tags": [
+          "comment"
+        ],
+        "summary": "fetch Comment records",
+        "description": "get a list of Comment records",
+        "parameters": [
+          {
+            "name": "case_id",
+            "in": "query",
+            "type": "integer",
+            "description": "case_id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment records",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Comment"
+              }
+            }
+          }
+        }
+      }
+    },
     "/features": {
       "get": {
         "tags": [
@@ -807,6 +836,113 @@
             }
           }
         }
+        "/users/invite_vendor_user": {		
+          "post": {		
+            "consumes": [		
+              "application/json"		
+            ],		
+            "tags": [		
+              "user",		
+              "team"		
+            ],		
+            "summary": "Invite a VendorUser (Team member)",		
+            "parameters": [		
+              {		
+                "name": "data",		
+                "in": "body",		
+                "required": true,		
+                "schema": {		
+                  "type": "object",		
+                  "required": [		
+                    "email",		
+                    "full_name"		
+                  ],		
+                  "properties": {		
+                    "team": {		
+                      "type": "string"		
+                    },		
+                    "permission_group_id": {		
+                      "type": "number",		
+                      "format": "integer"		
+                    },		
+                    "email": {		
+                      "type": "string"		
+                    },		
+                    "full_name": {		
+                      "type": "string"		
+                    },		
+                    "external_id": {		
+                      "type": "string"		
+                    }		
+                  }		
+                }		
+              }		
+            ],		
+            "responses": {		
+              "200": {		
+                "description": "success"		
+              }		
+            }		
+          }		
+        },		
+        "/users/invite_end_user": {
+          "post": {		
+            "tags": [		
+              "user"		
+            ],		
+            "summary": "Invite an EndUser (customer)",		
+            "parameters": [		
+              {		
+                "name": "data",		
+                "in": "body",		
+                "required": true,		
+                "schema": {		
+                  "type": "object",		
+                  "required": [		
+                    "account_status"		
+                  ],		
+                  "properties": {		
+                    "email": {		
+                      "type": "string"		
+                    },		
+                    "send_invite": {		
+                      "type": "boolean"		
+                    },		
+                    "full_name": {		
+                      "type": "string"		
+                    },		
+                    "user_external_id": {		
+                      "type": "string"		
+                    },		
+                    "account_external_id": {		
+                      "type": "string"		
+                    },		
+                    "account_name": {		
+                      "type": "string"		
+                    },		
+                    "monthly_value": {		
+                      "type": "number",		
+                      "format": "float"		
+                    },		
+                    "account_status": {		
+                      "type": "string",		
+                      "enum": [		
+                        "prospect",		
+                        "not_paying",		
+                        "paying"		
+                      ]		
+                    }		
+                  }		
+                }		
+              }		
+            ],		
+            "responses": {		
+              "200": {		
+                "description": "success"		
+              }		
+            }		
+          }		
+        },
       },
       "post": {
         "consumes": [
@@ -831,113 +967,6 @@
         "responses": {
           "200": {
             "description": "Success"
-          }
-        }
-      }
-    },
-    "/users/invite_vendor_user": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "tags": [
-          "user",
-          "team"
-        ],
-        "summary": "Invite a VendorUser (Team member)",
-        "parameters": [
-          {
-            "name": "data",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "required": [
-                "email",
-                "full_name"
-              ],
-              "properties": {
-                "team": {
-                  "type": "string"
-                },
-                "permission_group_id": {
-                  "type": "number",
-                  "format": "integer"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "full_name": {
-                  "type": "string"
-                },
-                "external_id": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success"
-          }
-        }
-      }
-    },
-    "/users/invite_end_user": {
-      "post": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Invite an EndUser (customer)",
-        "parameters": [
-          {
-            "name": "data",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "required": [
-                "account_status"
-              ],
-              "properties": {
-                "email": {
-                  "type": "string"
-                },
-                "send_invite": {
-                  "type": "boolean"
-                },
-                "full_name": {
-                  "type": "string"
-                },
-                "user_external_id": {
-                  "type": "string"
-                },
-                "account_external_id": {
-                  "type": "string"
-                },
-                "account_name": {
-                  "type": "string"
-                },
-                "monthly_value": {
-                  "type": "number",
-                  "format": "float"
-                },
-                "account_status": {
-                  "type": "string",
-                  "enum": [
-                    "prospect",
-                    "not_paying",
-                    "paying"
-                  ]
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success"
           }
         }
       }
