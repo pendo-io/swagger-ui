@@ -349,6 +349,35 @@
         }
       }
     },
+    "/comments": {
+      "get": {
+        "tags": [
+          "comment"
+        ],
+        "summary": "fetch Comment records",
+        "description": "get a list of Comment records",
+        "parameters": [
+          {
+            "name": "case_id",
+            "in": "query",
+            "type": "integer",
+            "description": "case_id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment records",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Comment"
+              }
+            }
+          }
+        }
+      }
+    },
     "/features": {
       "get": {
         "tags": [
