@@ -825,7 +825,21 @@
             "required": false
           },
           {
-            "$ref": "#/parameters/limit"
+            "name": "start",
+            "description": "Offset to start at",
+            "in": "query",
+            "type": "integer",
+            "minimum": 0,
+            "default": 0,
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "description": "Limit the number of records returned. Max value can be 300. If limit is set to more than 300 the api will return an error",
+            "default": 300,
+            "required": false
           },
           {
             "$ref": "#/parameters/order_by"
@@ -1364,11 +1378,7 @@
       }
     },
     "Tags": {
-      "description": "Simple tags are supplied as an array of Strings e.g ['Foo', 'Bar']. \nTo put the tags in categories replace the Strings with maps of using tag category as the key and tag value as the value, e.g \n\n[\n{Color:Red}, {Flavor:Cherry}\n]. Simple and categorised tags can be mixed in the same array.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+      "description": "Tags can contain simple tags or categorised tags. Simple tags are supplied as an array of Strings\nSimple Tag Example:\n['Foo', 'Bar']. \nTo put the tags in categories replace the Strings with maps of using tag category as the key and tag value as the value where value can be array of strings, e.g\nCategorised Tag Example:\n[\n{'Color':['Red', 'Yellow']}, \n{'Flavor':['Cherry']}\n] \nSimple and categorised tags can be mixed in the same array.\nBelow validations are done on the tag values of both simple and categorised tags:\n1. Tag values must be strings\n2. Tags must be at least 2 characters in length\n3. Invalid characters (we dont accept following characters in tag value)  , | { } : < > "
     },
     "Products": {
       "description": "Supplied as an array of maps where each map describes an existing or new product e.g [{id:exising_product_id, name:existing name}, {id:new_product_id, name: new product name}]. \nExisting product id/names held in your account can be referenced at https://feedback.pendo.io/app/#/vendor/products",
